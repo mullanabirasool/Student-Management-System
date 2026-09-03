@@ -1,0 +1,230 @@
+{% extends "students/base.html" %}
+
+
+{% block title %}
+Student Details
+{% endblock %}
+
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>
+        Student Details
+    </h2>
+
+    <div>
+
+        <a
+            href="{% url 'student_update' student.id %}"
+            class="btn btn-warning"
+        >
+            Edit
+        </a>
+
+        <a
+            href="{% url 'student_delete' student.id %}"
+            class="btn btn-danger"
+        >
+            Delete
+        </a>
+
+        <a
+            href="{% url 'student_list' %}"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="card p-4">
+
+    <div class="row g-4">
+
+
+        <div class="col-md-6">
+
+            <strong>Student ID</strong>
+
+            <p>
+                {{ student.id }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Date</strong>
+
+            <p>
+                {{ student.date }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Name</strong>
+
+            <p>
+                {{ student.name }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Mobile Number</strong>
+
+            <p>
+                {{ student.mobile_no }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Alternate Number</strong>
+
+            <p>
+                {{ student.alternate_no }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Email</strong>
+
+            <p>
+                {{ student.email_id }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-12">
+
+            <strong>Address</strong>
+
+            <p>
+                {{ student.address }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Course</strong>
+
+            <p>
+                {{ student.course }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Batch</strong>
+
+            <p>
+                {{ student.batch }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Experience / Fresher</strong>
+
+            <p>
+                {{ student.experience_fresher }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>How You Know</strong>
+
+            <p>
+                {{ student.how_you_know }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Contact</strong>
+
+            <p>
+                {{ student.contact }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Counselor</strong>
+
+            <p>
+                {{ student.counselor }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Fees</strong>
+
+            <p>
+                {{ student.fees }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <strong>Selected Type</strong>
+
+            <p>
+                {{ student.selected_type }}
+            </p>
+
+        </div>
+
+
+        <div class="col-md-12">
+
+            <strong>Comment</strong>
+
+            <p>
+                {{ student.comment }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}
