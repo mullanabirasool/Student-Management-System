@@ -26,6 +26,15 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        ""
+    ).split(",")
+    if origin.strip()
+]
+
 
 # ============================================================
 # APPLICATIONS
@@ -116,10 +125,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("MYSQLDATABASE", "student"),
-        "USER": os.environ.get("MYSQLUSER", "root"),
-        "PASSWORD": os.environ.get("MYSQLPASSWORD", ""),
-        "HOST": os.environ.get("MYSQLHOST", "localhost"),
+        "NAME": os.environ.get("MYSQL_DATABASE"),
+        "USER": os.environ.get("MYSQLUSER"),
+        "PASSWORD": os.environ.get("MYSQLPASSWORD"),
+        "HOST": os.environ.get("MYSQLHOST"),
         "PORT": os.environ.get("MYSQLPORT", "3306"),
     }
 }
