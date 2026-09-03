@@ -102,7 +102,7 @@ class Student(models.Model):
 
     class Meta:
         db_table = 'student_details'
-        managed = False
+        managed = True
 
     def __str__(self):
         return self.name
