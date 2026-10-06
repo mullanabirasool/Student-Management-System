@@ -1,7 +1,7 @@
 
 from pathlib import Path
 import os
-
+import dj_database_url
 # ============================================================
 # BASE DIRECTORY
 # ============================================================
@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-development-key")
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = [
     host.strip()
@@ -27,12 +27,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.environ.get(
-        "CSRF_TRUSTED_ORIGINS",
-        ""
-    ).split(",")
-    if origin.strip()
+    "https://student-management-system-production-3cca.up.railway.app",
 ]
 
 
@@ -122,16 +117,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Django will use the production database automatically.
 # ------------------------------------------------------------
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("MYSQL_DATABASE"),
-        "USER": os.environ.get("MYSQLUSER"),
-        "PASSWORD": os.environ.get("MYSQLPASSWORD"),
-        "HOST": os.environ.get("MYSQLHOST"),
-        "PORT": os.environ.get("MYSQLPORT", "3306"),
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "student",
+            "USER": "root",
+            "PASSWORD": "",
+            "HOST": "127.0.0.1",
+            "PORT": "3306",
+        }
+    }
+
 
 
 # ============================================================
@@ -219,24 +226,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 if not DEBUG:
 
-    SECURE_PROXY_SSL_HEADER = (
-        "HTTP_X_FORWARDED_PROTO",
-        "https",
-    )
+    # SECURE_PROXY_SSL_HEADER = (
+    #     "HTTP_X_FORWARDED_PROTO",
+    #     "https",
+    # )
 
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
 
-    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
 
-    CSRF_COOKIE_SECURE = True
-
-    SECURE_HSTS_SECONDS = 31536000
-
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-
-    SECURE_HSTS_PRELOAD = True
-
-
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
 # ============================================================
 # CSRF
 # ============================================================
