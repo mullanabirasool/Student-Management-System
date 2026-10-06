@@ -18,12 +18,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-development-key")
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.environ.get(
-        "ALLOWED_HOSTS",
-        "127.0.0.1,localhost"
-    ).split(",")
-    if host.strip()
+    "127.0.0.1",
+    "localhost",
+    ".onrender.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
